@@ -146,6 +146,7 @@
             justify-content: center;
             margin-top: 20px;
             gap: 5px;
+            flex-wrap: wrap;
         }
         .page-btn {
             padding: 5px 10px;
@@ -153,12 +154,22 @@
             color: white;
             border-radius: 3px;
             cursor: pointer;
+            min-width: 36px;
+            text-align: center;
         }
         .page-btn.active {
             background-color: #2c3e50;
         }
         .page-btn:hover:not(.active) {
             background-color: #2980b9;
+        }
+        .page-btn.disabled {
+            background-color: #95a5a6;
+            cursor: not-allowed;
+        }
+        .page-dots {
+            padding: 5px 10px;
+            color: #7f8c8d;
         }
         @media (max-width: 600px) {
             .japanese, .kanji-btn {
@@ -174,6 +185,10 @@
             button {
                 width: 80%;
             }
+            .page-btn {
+                padding: 5px 8px;
+                min-width: 30px;
+            }
         }
     </style>
 </head>
@@ -181,7 +196,7 @@
     <h1>Japanese Practice</h1>
     
     <div class="counter">
-        Showing <span id="item-count">0</span> items (Page <span id="current-page">1</span>)
+        Showing <span id="item-count">0</span> items (Page <span id="current-page">1</span> of <span id="total-pages">1</span>)
     </div>
     
     <div class="controls">
@@ -218,11 +233,10 @@
     </div>
     <script type="text/javascript" src="data.js"></script>
     <script>
-
-
         // Pagination settings
         const itemsPerPage = 5; // Change to 10 if you prefer
         let currentPage = 1;
+        let totalPages = 1;
 
         // Function to wrap kanji in buttons
         function enhanceKanji(text) {
@@ -238,6 +252,7 @@
         const hideAllBtn = document.getElementById('hide-all');
         const itemCount = document.getElementById('item-count');
         const currentPageSpan = document.getElementById('current-page');
+        const totalPagesSpan = document.getElementById('total-pages');
         const paginationDiv = document.getElementById('pagination');
         const kanjiModal = document.getElementById('kanji-modal');
         const kanjiModalChar = document.getElementById('kanji-modal-char');
@@ -264,6 +279,8 @@
             // Update counters
             itemCount.textContent = japaneseData.length;
             currentPageSpan.textContent = currentPage;
+            totalPages = Math.ceil(japaneseData.length / itemsPerPage);
+            totalPagesSpan.textContent = totalPages;
             
             // Setup pagination buttons
             setupPagination();
@@ -277,22 +294,50 @@
             });
         }
 
-        // Setup pagination buttons
+        // Setup pagination buttons with more options
         function setupPagination() {
-            const pageCount = Math.ceil(japaneseData.length / itemsPerPage);
             paginationDiv.innerHTML = '';
             
+            // First page button
+            const firstBtn = document.createElement('button');
+            firstBtn.className = `page-btn ${currentPage === 1 ? 'disabled' : ''}`;
+            firstBtn.textContent = '« First';
+            firstBtn.addEventListener('click', () => {
+                if (currentPage > 1) populateTable(1);
+            });
+            paginationDiv.appendChild(firstBtn);
+            
             // Previous button
-            if (currentPage > 1) {
-                const prevBtn = document.createElement('button');
-                prevBtn.className = 'page-btn';
-                prevBtn.innerHTML = '&laquo;';
-                prevBtn.addEventListener('click', () => populateTable(currentPage - 1));
-                paginationDiv.appendChild(prevBtn);
+            const prevBtn = document.createElement('button');
+            prevBtn.className = `page-btn ${currentPage === 1 ? 'disabled' : ''}`;
+            prevBtn.textContent = '‹ Prev';
+            prevBtn.addEventListener('click', () => {
+                if (currentPage > 1) populateTable(currentPage - 1);
+            });
+            paginationDiv.appendChild(prevBtn);
+            
+            // Always show first page
+            const firstPageBtn = document.createElement('button');
+            firstPageBtn.className = `page-btn ${currentPage === 1 ? 'active' : ''}`;
+            firstPageBtn.textContent = '1';
+            firstPageBtn.addEventListener('click', () => populateTable(1));
+            paginationDiv.appendChild(firstPageBtn);
+            
+            // Show dots if current page is far from start
+            if (currentPage > 3) {
+                const dots = document.createElement('span');
+                dots.className = 'page-dots';
+                dots.textContent = '...';
+                paginationDiv.appendChild(dots);
             }
             
-            // Page buttons
-            for (let i = 1; i <= pageCount; i++) {
+            // Show pages around current page
+            const startPage = Math.max(2, currentPage - 1);
+            const endPage = Math.min(totalPages - 1, currentPage + 1);
+            
+            for (let i = startPage; i <= endPage; i++) {
+                if (i === 1 || i === totalPages) continue; // Skip first and last as we handle them separately
+                
                 const pageBtn = document.createElement('button');
                 pageBtn.className = `page-btn ${i === currentPage ? 'active' : ''}`;
                 pageBtn.textContent = i;
@@ -300,14 +345,40 @@
                 paginationDiv.appendChild(pageBtn);
             }
             
-            // Next button
-            if (currentPage < pageCount) {
-                const nextBtn = document.createElement('button');
-                nextBtn.className = 'page-btn';
-                nextBtn.innerHTML = '&raquo;';
-                nextBtn.addEventListener('click', () => populateTable(currentPage + 1));
-                paginationDiv.appendChild(nextBtn);
+            // Show dots if current page is far from end
+            if (currentPage < totalPages - 2) {
+                const dots = document.createElement('span');
+                dots.className = 'page-dots';
+                dots.textContent = '...';
+                paginationDiv.appendChild(dots);
             }
+            
+            // Always show last page if there are multiple pages
+            if (totalPages > 1) {
+                const lastPageBtn = document.createElement('button');
+                lastPageBtn.className = `page-btn ${currentPage === totalPages ? 'active' : ''}`;
+                lastPageBtn.textContent = totalPages;
+                lastPageBtn.addEventListener('click', () => populateTable(totalPages));
+                paginationDiv.appendChild(lastPageBtn);
+            }
+            
+            // Next button
+            const nextBtn = document.createElement('button');
+            nextBtn.className = `page-btn ${currentPage === totalPages ? 'disabled' : ''}`;
+            nextBtn.textContent = 'Next ›';
+            nextBtn.addEventListener('click', () => {
+                if (currentPage < totalPages) populateTable(currentPage + 1);
+            });
+            paginationDiv.appendChild(nextBtn);
+            
+            // Last page button
+            const lastBtn = document.createElement('button');
+            lastBtn.className = `page-btn ${currentPage === totalPages ? 'disabled' : ''}`;
+            lastBtn.textContent = 'Last »';
+            lastBtn.addEventListener('click', () => {
+                if (currentPage < totalPages) populateTable(totalPages);
+            });
+            paginationDiv.appendChild(lastBtn);
         }
 
         // Show kanji modal
