@@ -5,9 +5,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const toggleRomajiButton = document.getElementById('toggle-romaji');
     const toggleEnglishButton = document.getElementById('toggle-english');
     
-    let showRomaji = true;
-    let showEnglish = true;
-    
     // Initial display
     displaySentences(japaneseData);
     
@@ -36,25 +33,24 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Toggle Romaji
     toggleRomajiButton.addEventListener('click', function() {
-        showRomaji = !showRomaji;
-        this.textContent = showRomaji ? 'Hide Romaji' : 'Show Romaji';
-        document.body.classList.toggle('hide-romaji', !showRomaji);
+        document.body.classList.toggle('hide-romaji');
+        this.textContent = document.body.classList.contains('hide-romaji') 
+            ? 'Show Romaji' 
+            : 'Hide Romaji';
     });
     
     // Toggle English
     toggleEnglishButton.addEventListener('click', function() {
-        showEnglish = !showEnglish;
-        this.textContent = showEnglish ? 'Hide English' : 'Show English';
-        document.body.classList.toggle('hide-english', !showEnglish);
+        document.body.classList.toggle('hide-english');
+        this.textContent = document.body.classList.contains('hide-english') 
+            ? 'Show English' 
+            : 'Hide English';
     });
     
     function displaySentences(data) {
         container.innerHTML = '';
         
         data.forEach(item => {
-            const row = document.createElement('div');
-            row.className = 'sentence-row';
-            
             const japaneseCell = document.createElement('div');
             japaneseCell.className = 'sentence-cell japanese-cell';
             japaneseCell.textContent = item.japanese;
