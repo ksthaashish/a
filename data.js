@@ -248,5 +248,30 @@
         "japanese": "ゆうべ遅くに地震がありました。",
         "romaji": "Yūbe osoku ni jishin ga arimashita.",
         "english": "There was an earthquake late last night."
+    },
+    {
+        "japanese": "銀座の街を歩きました。",
+        "romaji": "Ginza no machi o arukimashita.",
+        "english": "I walked through Ginza."
+    },
+    {
+        "japanese": "三十分歩いて、やっと駅に着いた。",
+        "romaji": "San-jup-pun aruite, yatto eki ni tsuita.",
+        "english": "After walking for thirty minutes, we finally reached the station."
+    },
+    {
+        "japanese": "ちょっと歩こうか。",
+        "romaji": "Chotto arukō ka.",
+        "english": "Shall we take a short walk?"
+    },
+    {
+        "japanese": "駅から家まで歩いて五分ぐらいです。",
+        "romaji": "Eki kara ie made aruite go-fun gurai desu.",
+        "english": "It's about a five-minute walk from the station to my house."
+    },
+    {
+        "japanese": "足が痛くて、歩けません。",
+        "romaji": "Ashi ga itakute, arukemasen.",
+        "english": "My leg hurts, so I can't walk."
     }
         ];
