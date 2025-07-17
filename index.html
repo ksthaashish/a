@@ -11,26 +11,21 @@
         <h1>Japanese Sentences</h1>
     </header>
     
-    <main>
-        <div class="controls">
-            <input type="text" id="search" placeholder="Search in any language...">
-            <div class="toggle-buttons">
-                <button id="toggle-romaji">Hide Romaji</button>
-                <button id="toggle-english">Hide English</button>
-                <button id="shuffle">Shuffle Sentences</button>
-            </div>
-        </div>
-        
+    <div class="controls">
+        <input type="text" id="search" placeholder="Search in any language...">
+        <button id="toggle-romaji">Hide Romaji</button>
+        <button id="toggle-english">Hide English</button>
+        <button id="shuffle">Shuffle Sentences</button>
+    </div>
+    
+    <div class="table-container">
         <div class="table-header">
-            <div>Japanese</div>
+            <div class="japanese-header">Japanese</div>
             <div class="romaji-header">Romaji</div>
             <div class="english-header">English</div>
         </div>
-        
-        <div id="sentences-container">
-            <!-- Sentences will be inserted here by JavaScript -->
-        </div>
-    </main>
+        <div id="sentences-container"></div>
+    </div>
 
     <script src="data.js"></script>
     <script src="script.js"></script>
