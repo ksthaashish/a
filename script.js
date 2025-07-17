@@ -2,6 +2,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const container = document.getElementById('sentences-container');
     const searchInput = document.getElementById('search');
     const shuffleButton = document.getElementById('shuffle');
+    const toggleRomajiButton = document.getElementById('toggle-romaji');
+    const toggleEnglishButton = document.getElementById('toggle-english');
+    
+    let showRomaji = true;
+    let showEnglish = true;
     
     // Initial display
     displaySentences(japaneseData);
@@ -27,6 +32,20 @@ document.addEventListener('DOMContentLoaded', function() {
     shuffleButton.addEventListener('click', function() {
         const shuffled = [...japaneseData].sort(() => Math.random() - 0.5);
         displaySentences(shuffled);
+    });
+    
+    // Toggle Romaji
+    toggleRomajiButton.addEventListener('click', function() {
+        showRomaji = !showRomaji;
+        this.textContent = showRomaji ? 'Hide Romaji' : 'Show Romaji';
+        document.body.classList.toggle('hide-romaji', !showRomaji);
+    });
+    
+    // Toggle English
+    toggleEnglishButton.addEventListener('click', function() {
+        showEnglish = !showEnglish;
+        this.textContent = showEnglish ? 'Hide English' : 'Show English';
+        document.body.classList.toggle('hide-english', !showEnglish);
     });
     
     function displaySentences(data) {
