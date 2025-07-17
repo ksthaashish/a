@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Japanese Practice</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        button {
+            padding: 8px 15px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        button.active {
+            background-color: #2c3e50;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        th {
+            background-color: #2c3e50;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .japanese {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 22px;
+            font-weight: 500;
+            line-height: 1.8;
+            color: #000;
+        }
+        .kanji-btn {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 22px;
+            font-weight: 500;
+            background: none;
+            border: none;
+            color: #000;
+            padding: 0 2px;
+            margin: 0;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .kanji-btn:hover {
+            color: #e74c3c;
+            transform: scale(1.1);
+        }
+        .romaji-col {
+            font-style: italic;
+            color: #555;
+        }
+        .english-col {
+            color: #2c3e50;
+        }
+        .hidden {
+            display: none;
+        }
+        .counter {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 18px;
+            color: #7f8c8d;
+        }
+        /* Kanji modal styles */
+        .kanji-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .kanji-modal-content {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 80%;
+        }
+        .kanji-modal-char {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 120px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        .kanji-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+        }
+        /* Pagination styles */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 5px;
+        }
+        .page-btn {
+            padding: 5px 10px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .page-btn.active {
+            background-color: #2c3e50;
+        }
+        .page-btn:hover:not(.active) {
+            background-color: #2980b9;
+        }
+        @media (max-width: 600px) {
+            .japanese, .kanji-btn {
+                font-size: 20px;
+            }
+            .kanji-modal-char {
+                font-size: 80px;
+            }
+            .controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            button {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Japanese Practice</h1>
+    
+    <div class="counter">
+        Showing <span id="item-count">0</span> items (Page <span id="current-page">1</span>)
+    </div>
+    
+    <div class="controls">
+        <button id="toggle-romaji" class="active">Hide Romaji</button>
+        <button id="toggle-english" class="active">Hide English</button>
+        <button id="show-all">Show All</button>
+        <button id="hide-all">Hide All</button>
+    </div>
+    
+    <table id="practice-table">
+        <thead>
+            <tr>
+                <th>Japanese</th>
+                <th class="romaji-col">Romaji</th>
+                <th class="english-col">English Meaning</th>
+            </tr>
+        </thead>
+        <tbody id="table-body">
+            <!-- Data will be inserted here by JavaScript -->
+        </tbody>
+    </table>
+
+    <div id="pagination" class="pagination">
+        <!-- Pagination buttons will be inserted here by JavaScript -->
+    </div>
+
+    <!-- Kanji Modal -->
+    <div id="kanji-modal" class="kanji-modal">
+        <span class="kanji-modal-close">&times;</span>
+        <div class="kanji-modal-content">
+            <div id="kanji-modal-char" class="kanji-modal-char"></div>
+            <div id="kanji-modal-info"></div>
+        </div>
+    </div>
+    <script type="text/javascript" src="data.js"></script>
+    <script>
+
+
+        // Pagination settings
+        const itemsPerPage = 5; // Change to 10 if you prefer
+        let currentPage = 1;
+
+        // Function to wrap kanji in buttons
+        function enhanceKanji(text) {
+            const kanjiRegex = /([\u4e00-\u9faf\u3400-\u4dbf]+)/g;
+            return text.replace(kanjiRegex, '<button class="kanji-btn" data-kanji="$1">$1</button>');
+        }
+
+        // DOM elements
+        const tableBody = document.getElementById('table-body');
+        const toggleRomajiBtn = document.getElementById('toggle-romaji');
+        const toggleEnglishBtn = document.getElementById('toggle-english');
+        const showAllBtn = document.getElementById('show-all');
+        const hideAllBtn = document.getElementById('hide-all');
+        const itemCount = document.getElementById('item-count');
+        const currentPageSpan = document.getElementById('current-page');
+        const paginationDiv = document.getElementById('pagination');
+        const kanjiModal = document.getElementById('kanji-modal');
+        const kanjiModalChar = document.getElementById('kanji-modal-char');
+        const kanjiModalClose = document.querySelector('.kanji-modal-close');
+
+        // Initialize the table with pagination
+        function populateTable(page = 1) {
+            currentPage = page;
+            const startIdx = (page - 1) * itemsPerPage;
+            const endIdx = startIdx + itemsPerPage;
+            const pageData = japaneseData.slice(startIdx, endIdx);
+            
+            tableBody.innerHTML = '';
+            pageData.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="japanese">${enhanceKanji(item.japanese)}</td>
+                    <td class="romaji-col">${item.romaji}</td>
+                    <td class="english-col">${item.english}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+            
+            // Update counters
+            itemCount.textContent = japaneseData.length;
+            currentPageSpan.textContent = currentPage;
+            
+            // Setup pagination buttons
+            setupPagination();
+            
+            // Add event listeners to all kanji buttons
+            document.querySelectorAll('.kanji-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const kanji = this.getAttribute('data-kanji');
+                    showKanjiModal(kanji);
+                });
+            });
+        }
+
+        // Setup pagination buttons
+        function setupPagination() {
+            const pageCount = Math.ceil(japaneseData.length / itemsPerPage);
+            paginationDiv.innerHTML = '';
+            
+            // Previous button
+            if (currentPage > 1) {
+                const prevBtn = document.createElement('button');
+                prevBtn.className = 'page-btn';
+                prevBtn.innerHTML = '&laquo;';
+                prevBtn.addEventListener('click', () => populateTable(currentPage - 1));
+                paginationDiv.appendChild(prevBtn);
+            }
+            
+            // Page buttons
+            for (let i = 1; i <= pageCount; i++) {
+                const pageBtn = document.createElement('button');
+                pageBtn.className = `page-btn ${i === currentPage ? 'active' : ''}`;
+                pageBtn.textContent = i;
+                pageBtn.addEventListener('click', () => populateTable(i));
+                paginationDiv.appendChild(pageBtn);
+            }
+            
+            // Next button
+            if (currentPage < pageCount) {
+                const nextBtn = document.createElement('button');
+                nextBtn.className = 'page-btn';
+                nextBtn.innerHTML = '&raquo;';
+                nextBtn.addEventListener('click', () => populateTable(currentPage + 1));
+                paginationDiv.appendChild(nextBtn);
+            }
+        }
+
+        // Show kanji modal
+        function showKanjiModal(kanji) {
+            kanjiModalChar.textContent = kanji;
+            kanjiModal.style.display = 'flex';
+        }
+
+        // Close kanji modal
+        function closeKanjiModal() {
+            kanjiModal.style.display = 'none';
+        }
+
+        // Toggle columns
+        function toggleColumn(columnClass, button) {
+            const columns = document.querySelectorAll(`.${columnClass}`);
+            const isHidden = columns[0].classList.contains('hidden');
+            
+            columns.forEach(col => {
+                if (isHidden) {
+                    col.classList.remove('hidden');
+                } else {
+                    col.classList.add('hidden');
+                }
+            });
+            
+            button.textContent = isHidden ? `Hide ${columnClass.split('-')[0]}` : `Show ${columnClass.split('-')[0]}`;
+            button.classList.toggle('active');
+        }
+
+        // Event listeners
+        toggleRomajiBtn.addEventListener('click', () => toggleColumn('romaji-col', toggleRomajiBtn));
+        toggleEnglishBtn.addEventListener('click', () => toggleColumn('english-col', toggleEnglishBtn));
+        showAllBtn.addEventListener('click', () => {
+            document.querySelectorAll('.romaji-col, .english-col').forEach(col => {
+                col.classList.remove('hidden');
+            });
+            toggleRomajiBtn.textContent = 'Hide Romaji';
+            toggleEnglishBtn.textContent = 'Hide English';
+            toggleRomajiBtn.classList.add('active');
+            toggleEnglishBtn.classList.add('active');
+        });
+        hideAllBtn.addEventListener('click', () => {
+            document.querySelectorAll('.romaji-col, .english-col').forEach(col => {
+                col.classList.add('hidden');
+            });
+            toggleRomajiBtn.textContent = 'Show Romaji';
+            toggleEnglishBtn.textContent = 'Show English';
+            toggleRomajiBtn.classList.remove('active');
+            toggleEnglishBtn.classList.remove('active');
+        });
+        kanjiModalClose.addEventListener('click', closeKanjiModal);
+        kanjiModal.addEventListener('click', function(e) {
+            if (e.target === kanjiModal) {
+                closeKanjiModal();
+            }
+        });
+
+        // Initialize the page
+        populateTable();
+    </script>
+</body>
+</html>
