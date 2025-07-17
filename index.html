@@ -7,6 +7,16 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Kanji Zoom Modal -->
+    <div id="kanji-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="zoomed-kanji"></div>
+            <div id="zoomed-romaji"></div>
+            <div id="zoomed-english"></div>
+        </div>
+    </div>
+
     <header>
         <h1>Japanese Sentences</h1>
     </header>
@@ -20,7 +30,7 @@
     
     <div class="table-container">
         <div class="table-header">
-            <div class="japanese-header">Japanese</div>
+            <div class="japanese-header">Japanese (click to zoom)</div>
             <div class="romaji-header">Romaji</div>
             <div class="english-header">English</div>
         </div>
