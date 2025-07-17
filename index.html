@@ -14,13 +14,17 @@
     <main>
         <div class="controls">
             <input type="text" id="search" placeholder="Search in any language...">
-            <button id="shuffle">Shuffle Sentences</button>
+            <div class="toggle-buttons">
+                <button id="toggle-romaji">Hide Romaji</button>
+                <button id="toggle-english">Hide English</button>
+                <button id="shuffle">Shuffle Sentences</button>
+            </div>
         </div>
         
         <div class="table-header">
             <div>Japanese</div>
-            <div>Romaji</div>
-            <div>English</div>
+            <div class="romaji-header">Romaji</div>
+            <div class="english-header">English</div>
         </div>
         
         <div id="sentences-container">
