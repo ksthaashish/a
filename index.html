@@ -171,6 +171,15 @@
             padding: 5px 10px;
             color: #7f8c8d;
         }
+        .show-all-btn {
+            background-color: #27ae60;
+        }
+        .show-all-btn:hover {
+            background-color: #219955;
+        }
+        .show-all-btn.active {
+            background-color: #1e8449;
+        }
         @media (max-width: 600px) {
             .japanese, .kanji-btn {
                 font-size: 20px;
@@ -196,14 +205,14 @@
     <h1>Japanese Practice</h1>
     
     <div class="counter">
-        Showing <span id="item-count">0</span> items (Page <span id="current-page">1</span> of <span id="total-pages">1</span>)
+        Showing <span id="showing-count">0</span> of <span id="total-count">0</span> items (Page <span id="current-page">1</span> of <span id="total-pages">1</span>)
     </div>
     
     <div class="controls">
         <button id="toggle-romaji" class="active">Hide Romaji</button>
         <button id="toggle-english" class="active">Hide English</button>
-        <button id="show-all">Show All</button>
-        <button id="hide-all">Hide All</button>
+        <button id="show-all-columns">Show All Columns</button>
+        <button id="hide-all-columns">Hide All Columns</button>
     </div>
     
     <table id="practice-table">
@@ -234,9 +243,11 @@
     <script type="text/javascript" src="data.js"></script>
     <script>
         // Pagination settings
-        const itemsPerPage = 5; // Change to 10 if you prefer
+        const DEFAULT_ITEMS_PER_PAGE = 5;
+        let itemsPerPage = DEFAULT_ITEMS_PER_PAGE;
         let currentPage = 1;
         let totalPages = 1;
+        let showAllMode = false;
 
         // Function to wrap kanji in buttons
         function enhanceKanji(text) {
@@ -248,9 +259,10 @@
         const tableBody = document.getElementById('table-body');
         const toggleRomajiBtn = document.getElementById('toggle-romaji');
         const toggleEnglishBtn = document.getElementById('toggle-english');
-        const showAllBtn = document.getElementById('show-all');
-        const hideAllBtn = document.getElementById('hide-all');
-        const itemCount = document.getElementById('item-count');
+        const showAllColumnsBtn = document.getElementById('show-all-columns');
+        const hideAllColumnsBtn = document.getElementById('hide-all-columns');
+        const showingCount = document.getElementById('showing-count');
+        const totalCount = document.getElementById('total-count');
         const currentPageSpan = document.getElementById('current-page');
         const totalPagesSpan = document.getElementById('total-pages');
         const paginationDiv = document.getElementById('pagination');
@@ -261,9 +273,22 @@
         // Initialize the table with pagination
         function populateTable(page = 1) {
             currentPage = page;
-            const startIdx = (page - 1) * itemsPerPage;
-            const endIdx = startIdx + itemsPerPage;
-            const pageData = japaneseData.slice(startIdx, endIdx);
+            
+            let startIdx, endIdx, pageData;
+            
+            if (showAllMode) {
+                // Show all data in one page
+                pageData = japaneseData;
+                itemsPerPage = japaneseData.length;
+                startIdx = 0;
+                endIdx = japaneseData.length;
+            } else {
+                // Normal pagination mode
+                itemsPerPage = DEFAULT_ITEMS_PER_PAGE;
+                startIdx = (page - 1) * itemsPerPage;
+                endIdx = startIdx + itemsPerPage;
+                pageData = japaneseData.slice(startIdx, endIdx);
+            }
             
             tableBody.innerHTML = '';
             pageData.forEach(item => {
@@ -277,10 +302,16 @@
             });
             
             // Update counters
-            itemCount.textContent = japaneseData.length;
-            currentPageSpan.textContent = currentPage;
-            totalPages = Math.ceil(japaneseData.length / itemsPerPage);
-            totalPagesSpan.textContent = totalPages;
+            totalCount.textContent = japaneseData.length;
+            showingCount.textContent = showAllMode ? japaneseData.length : `${startIdx + 1}-${Math.min(endIdx, japaneseData.length)}`;
+            currentPageSpan.textContent = showAllMode ? 'All' : currentPage;
+            
+            if (showAllMode) {
+                totalPagesSpan.textContent = '1';
+            } else {
+                totalPages = Math.ceil(japaneseData.length / itemsPerPage);
+                totalPagesSpan.textContent = totalPages;
+            }
             
             // Setup pagination buttons
             setupPagination();
@@ -297,6 +328,19 @@
         // Setup pagination buttons with more options
         function setupPagination() {
             paginationDiv.innerHTML = '';
+            
+            if (showAllMode) {
+                // Show only the "Show Pagination" button
+                const showPaginationBtn = document.createElement('button');
+                showPaginationBtn.className = 'page-btn show-all-btn';
+                showPaginationBtn.textContent = 'Show Pagination';
+                showPaginationBtn.addEventListener('click', () => {
+                    showAllMode = false;
+                    populateTable(1);
+                });
+                paginationDiv.appendChild(showPaginationBtn);
+                return;
+            }
             
             // First page button
             const firstBtn = document.createElement('button');
@@ -317,27 +361,26 @@
             paginationDiv.appendChild(prevBtn);
             
             // Always show first page
-            const firstPageBtn = document.createElement('button');
-            firstPageBtn.className = `page-btn ${currentPage === 1 ? 'active' : ''}`;
-            firstPageBtn.textContent = '1';
-            firstPageBtn.addEventListener('click', () => populateTable(1));
-            paginationDiv.appendChild(firstPageBtn);
-            
-            // Show dots if current page is far from start
-            if (currentPage > 3) {
-                const dots = document.createElement('span');
-                dots.className = 'page-dots';
-                dots.textContent = '...';
-                paginationDiv.appendChild(dots);
+            if (currentPage > 2) {
+                const firstPageBtn = document.createElement('button');
+                firstPageBtn.className = 'page-btn';
+                firstPageBtn.textContent = '1';
+                firstPageBtn.addEventListener('click', () => populateTable(1));
+                paginationDiv.appendChild(firstPageBtn);
+                
+                if (currentPage > 3) {
+                    const dots = document.createElement('span');
+                    dots.className = 'page-dots';
+                    dots.textContent = '...';
+                    paginationDiv.appendChild(dots);
+                }
             }
             
             // Show pages around current page
-            const startPage = Math.max(2, currentPage - 1);
-            const endPage = Math.min(totalPages - 1, currentPage + 1);
+            const startPage = Math.max(1, currentPage - 1);
+            const endPage = Math.min(totalPages, currentPage + 1);
             
             for (let i = startPage; i <= endPage; i++) {
-                if (i === 1 || i === totalPages) continue; // Skip first and last as we handle them separately
-                
                 const pageBtn = document.createElement('button');
                 pageBtn.className = `page-btn ${i === currentPage ? 'active' : ''}`;
                 pageBtn.textContent = i;
@@ -345,18 +388,17 @@
                 paginationDiv.appendChild(pageBtn);
             }
             
-            // Show dots if current page is far from end
-            if (currentPage < totalPages - 2) {
-                const dots = document.createElement('span');
-                dots.className = 'page-dots';
-                dots.textContent = '...';
-                paginationDiv.appendChild(dots);
-            }
-            
-            // Always show last page if there are multiple pages
-            if (totalPages > 1) {
+            // Show dots and last page if needed
+            if (currentPage < totalPages - 1) {
+                if (currentPage < totalPages - 2) {
+                    const dots = document.createElement('span');
+                    dots.className = 'page-dots';
+                    dots.textContent = '...';
+                    paginationDiv.appendChild(dots);
+                }
+                
                 const lastPageBtn = document.createElement('button');
-                lastPageBtn.className = `page-btn ${currentPage === totalPages ? 'active' : ''}`;
+                lastPageBtn.className = 'page-btn';
                 lastPageBtn.textContent = totalPages;
                 lastPageBtn.addEventListener('click', () => populateTable(totalPages));
                 paginationDiv.appendChild(lastPageBtn);
@@ -379,6 +421,16 @@
                 if (currentPage < totalPages) populateTable(totalPages);
             });
             paginationDiv.appendChild(lastBtn);
+            
+            // Show All button
+            const showAllBtn = document.createElement('button');
+            showAllBtn.className = 'page-btn show-all-btn';
+            showAllBtn.textContent = 'Show All';
+            showAllBtn.addEventListener('click', () => {
+                showAllMode = true;
+                populateTable();
+            });
+            paginationDiv.appendChild(showAllBtn);
         }
 
         // Show kanji modal
@@ -412,7 +464,7 @@
         // Event listeners
         toggleRomajiBtn.addEventListener('click', () => toggleColumn('romaji-col', toggleRomajiBtn));
         toggleEnglishBtn.addEventListener('click', () => toggleColumn('english-col', toggleEnglishBtn));
-        showAllBtn.addEventListener('click', () => {
+        showAllColumnsBtn.addEventListener('click', () => {
             document.querySelectorAll('.romaji-col, .english-col').forEach(col => {
                 col.classList.remove('hidden');
             });
@@ -421,7 +473,7 @@
             toggleRomajiBtn.classList.add('active');
             toggleEnglishBtn.classList.add('active');
         });
-        hideAllBtn.addEventListener('click', () => {
+        hideAllColumnsBtn.addEventListener('click', () => {
             document.querySelectorAll('.romaji-col, .english-col').forEach(col => {
                 col.classList.add('hidden');
             });
