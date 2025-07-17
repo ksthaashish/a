@@ -1,132 +1,91 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
-    background-color: #f5f5f5;
-}
-
-header {
-    background-color: #e74c3c;
-    color: white;
-    padding: 15px;
-    text-align: center;
-    margin-bottom: 20px;
-    border-radius: 5px;
-}
-
-.controls {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-#search {
-    flex: 1;
-    min-width: 200px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-button {
-    padding: 10px 15px;
-    background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #2980b9;
-}
-
-.table-container {
-    background-color: white;
-    border-radius: 5px;
-    overflow: hidden;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.table-header {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    background-color: #2c3e50;
-    color: white;
-    font-weight: bold;
-}
-
-.table-header div {
-    padding: 12px 15px;
-}
-
-#sentences-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-}
-
-.sentence-cell {
-    padding: 12px 15px;
-    border-bottom: 1px solid #eee;
-}
-
-.japanese-cell {
-    font-family: "MS Gothic", "Hiragino Sans", sans-serif;
-    font-size: 18px;
-}
-
-.romaji-cell {
-    font-style: italic;
-    color: #555;
-}
-
-/* Column hiding styles */
-.hide-romaji .romaji-header,
-.hide-romaji .romaji-cell {
-    display: none;
-}
-
-.hide-english .english-header,
-.hide-english .english-cell {
-    display: none;
-}
-
-.hide-romaji #sentences-container,
-.hide-romaji .table-header {
-    grid-template-columns: 1fr 1fr;
-}
-
-.hide-english #sentences-container,
-.hide-english .table-header {
-    grid-template-columns: 1fr 1fr;
-}
-
-.hide-romaji.hide-english #sentences-container,
-.hide-romaji.hide-english .table-header {
-    grid-template-columns: 1fr;
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-    .table-header, #sentences-container {
-        grid-template-columns: 1fr;
-    }
-    
-    .sentence-row {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-    }
-    
-    .hide-romaji .sentence-row {
-        grid-template-columns: 1fr 1fr;
-    }
-    
-    .hide-english .sentence-row {
-        grid-template-columns: 1fr 1fr;
-    }
-    
-    .hide-romaji.hide-english .sentence-row {
-        grid-template-columns: 1fr;
-    }
-}
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        header {
+            background-color: #e74c3c;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        #search {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .table-container {
+            background-color: white;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .table-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            background-color: #2c3e50;
+            color: white;
+            font-weight: bold;
+        }
+        .table-header div {
+            padding: 12px 15px;
+        }
+        #sentences-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+        .sentence-cell {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .japanese-cell {
+            font-family: "MS Gothic", "Hiragino Sans", sans-serif;
+            font-size: 18px;
+        }
+        .romaji-cell {
+            font-style: italic;
+            color: #555;
+        }
+        /* Column hiding styles */
+        .hide-romaji .romaji-header,
+        .hide-romaji .romaji-cell {
+            display: none;
+        }
+        .hide-english .english-header,
+        .hide-english .english-cell {
+            display: none;
+        }
+        .hide-romaji #sentences-container,
+        .hide-romaji .table-header {
+            grid-template-columns: 1fr 1fr;
+        }
+        .hide-english #sentences-container,
+        .hide-english .table-header {
+            grid-template-columns: 1fr 1fr;
+        }
+        .hide-romaji.hide-english #sentences-container,
+        .hide-romaji.hide-english .table-header {
+            grid-template-columns: 1fr;
+        }
