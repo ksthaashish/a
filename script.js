@@ -5,14 +5,22 @@ document.addEventListener('DOMContentLoaded', function() {
     const toggleRomajiBtn = document.getElementById('toggle-romaji');
     const toggleEnglishBtn = document.getElementById('toggle-english');
     
+    // Modal elements
+    const modal = document.getElementById('kanji-modal');
+    const zoomedKanji = document.getElementById('zoomed-kanji');
+    const zoomedRomaji = document.getElementById('zoomed-romaji');
+    const zoomedEnglish = document.getElementById('zoomed-english');
+    const closeBtn = document.querySelector('.close');
+    
     let currentData = [...japaneseData];
     
     function renderSentences(data) {
         container.innerHTML = '';
-        data.forEach(item => {
+        data.forEach((item, index) => {
             const japaneseCell = document.createElement('div');
             japaneseCell.className = 'sentence-cell japanese-cell';
             japaneseCell.textContent = item.japanese;
+            japaneseCell.dataset.index = index; // Store index for reference
             
             const romajiCell = document.createElement('div');
             romajiCell.className = 'sentence-cell romaji-cell';
@@ -25,8 +33,29 @@ document.addEventListener('DOMContentLoaded', function() {
             container.appendChild(japaneseCell);
             container.appendChild(romajiCell);
             container.appendChild(englishCell);
+            
+            // Add click event to Japanese cell
+            japaneseCell.addEventListener('click', function() {
+                const idx = this.dataset.index;
+                zoomedKanji.textContent = currentData[idx].japanese;
+                zoomedRomaji.textContent = currentData[idx].romaji;
+                zoomedEnglish.textContent = currentData[idx].english;
+                modal.style.display = 'block';
+            });
         });
     }
+    
+    // Close modal when clicking X
+    closeBtn.addEventListener('click', function() {
+        modal.style.display = 'none';
+    });
+    
+    // Close modal when clicking outside
+    window.addEventListener('click', function(event) {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    });
     
     // Initial render
     renderSentences(currentData);
