@@ -273,5 +273,30 @@
         "japanese": "足が痛くて、歩けません。",
         "romaji": "Ashi ga itakute, arukemasen.",
         "english": "My leg hurts, so I can't walk."
+    },
+    {
+        "japanese": "週末、友達と六本木で遊んだ。",
+        "romaji": "Shūmatsu, tomodachi to Roppongi de asonda.",
+        "english": "I hung out with friends in Roppongi last weekend."
+    },
+    {
+        "japanese": "弟とゲームをして遊ぶつもりです。",
+        "romaji": "Otōto to gēmu o shite asobu tsumori desu.",
+        "english": "I plan to play games with my little brother."
+    },
+    {
+        "japanese": "遊んでばかりいないで、勉強しなさい。",
+        "romaji": "Asonde bakari inai de, benkyō shinasai.",
+        "english": "Don't just play around - study!"
+    },
+    {
+        "japanese": "危険。この川で遊ぶな。",
+        "romaji": "Kiken. Kono kawa de asobu na.",
+        "english": "Danger! Don't play in this river."
+    },
+    {
+        "japanese": "どうぞ近いうちに遊びに来てください。",
+        "romaji": "Dōzo chikai uchi ni asobi ni kite kudasai.",
+        "english": "Please come visit us sometime soon."
     }
         ];
