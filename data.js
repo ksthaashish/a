@@ -298,5 +298,30 @@
         "japanese": "どうぞ近いうちに遊びに来てください。",
         "romaji": "Dōzo chikai uchi ni asobi ni kite kudasai.",
         "english": "Please come visit us sometime soon."
+    },
+{
+        "japanese": "ボールが窓に当たって、ガラスが割れた。",
+        "romaji": "Bōru ga mado ni atatte, garasu ga wareta.",
+        "english": "The ball hit the window and broke the glass."
+    },
+    {
+        "japanese": "天気予報が当たって、午後から雪が降った。",
+        "romaji": "Tenki-yohō ga atatte, gogo kara yuki ga futta.",
+        "english": "The weather forecast was correct - it snowed in the afternoon."
+    },
+    {
+        "japanese": "宝くじで百万円が当たった。",
+        "romaji": "Takarakuji de hyaku-man en ga atatta.",
+        "english": "I hit the jackpot and won one million yen in the lottery."
+    },
+    {
+        "japanese": "その映画はとても当たった。",
+        "romaji": "Sono eiga wa totemo atatta.",
+        "english": "That movie was a huge success."
+    },
+    {
+        "japanese": "私の部屋は日が当たらない。",
+        "romaji": "Watashi no heya wa hi ga ataranai.",
+        "english": "My room doesn't get any sunlight."
     }
         ];
