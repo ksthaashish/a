@@ -323,5 +323,205 @@
         "japanese": "私の部屋は日が当たらない。",
         "romaji": "Watashi no heya wa hi ga ataranai.",
         "english": "My room doesn't get any sunlight."
+    },
+    {
+        "japanese": "ダーツを的の中心に当てるのは難しい。",
+        "romaji": "Dātsu o mato no chūshin ni ateru no wa muzukashii.",
+        "english": "It's hard to hit the bullseye in darts."
+    },
+    {
+        "japanese": "クイズの答えを当てました。",
+        "romaji": "Kuizu no kotae o atemashita.",
+        "english": "I guessed the quiz answer correctly."
+    },
+    {
+        "japanese": "この箱の中身は何か当ててみてください。",
+        "romaji": "Kono hako no naka wa nani ka atete mite kudasai.",
+        "english": "Try to guess what's inside this box."
+    },
+    {
+        "japanese": "額に手を当ててみたら、熱かった。",
+        "romaji": "Hitai ni te o atete mitara, atsukatta.",
+        "english": "When I felt my forehead, it was hot."
+    },
+    {
+        "japanese": "これはあなたにあてた手紙です。",
+        "romaji": "Kore wa anata ni ateta tegami desu.",
+        "english": "This letter is addressed to you."
+    },
+        {
+        "japanese": "切手がたくさん集まった。",
+        "romaji": "Kitte ga takusan atsumatta.",
+        "english": "I've collected many stamps."
+    },
+    {
+        "japanese": "明日は何時に集まればいいですか。",
+        "romaji": "Ashita wa nan-ji ni atsumareba ii desu ka.",
+        "english": "What time should we gather tomorrow?"
+    },
+    {
+        "japanese": "十時に集まってください。",
+        "romaji": "Jū-ji ni atsumatte kudasai.",
+        "english": "Please gather at 10 o'clock."
+    },
+    {
+        "japanese": "またいつか集まりましょう。",
+        "romaji": "Mata itsuka atsumarimashō.",
+        "english": "Let's meet up again sometime."
+    },
+    {
+        "japanese": "コンサートに三千人ぐらいの人が集まりました。",
+        "romaji": "Konsāto ni san-zen-nin gurai no hito ga atsumarimashita.",
+        "english": "About 3,000 people came to the concert."
+    },
+    {
+        "japanese": "私は切手を集めています。",
+        "romaji": "Watashi wa kitte o atsumete imasu.",
+        "english": "I collect stamps."
+    },
+    {
+        "japanese": "生徒たちは全員校庭に集められた。",
+        "romaji": "Seito-tachi wa zen-in kōtei ni atsumerareta.",
+        "english": "All the students were gathered in the schoolyard."
+    },
+    {
+        "japanese": "論文を書くために、資料を集めておきます。",
+        "romaji": "Ronbun o kaku tame ni, shiryō o atsumete okimasu.",
+        "english": "I'll collect research materials for writing my paper."
+    },
+    {
+        "japanese": "集めたごみを燃やしましょう。",
+        "romaji": "Atsumeta gomi o moyashimashō.",
+        "english": "Let's burn the garbage we've collected."
+    },
+    {
+        "japanese": "彼女の服は、周りの人の注目を集めた。",
+        "romaji": "Kanojo no fuku wa mawari no hito no chūmoku o atsumeta.",
+        "english": "Her outfit drew attention from everyone around."
+    },
+    {
+        "japanese": "私は切手を集めています。",
+        "romaji": "Watashi wa kitte o atsumete imasu.",
+        "english": "I collect stamps as a hobby."
+    },
+    {
+        "japanese": "生徒たちは全員校庭に集められた。",
+        "romaji": "Seito-tachi wa zen-in kōtei ni atsumerareta.",
+        "english": "All students were gathered in the schoolyard."
+    },
+    {
+        "japanese": "論文を書くために、資料を集めておきます。",
+        "romaji": "Ronbun o kaku tame ni, shiryō o atsumete okimasu.",
+        "english": "I'll gather reference materials for my research paper."
+    },
+    {
+        "japanese": "集めたごみを燃やしましょう。",
+        "romaji": "Atsumeta gomi o moyashimashō.",
+        "english": "Let's burn the collected waste."
+    },
+    {
+        "japanese": "彼女の服は、周りの人の注目を集めた。",
+        "romaji": "Kanojo no fuku wa mawari no hito no chūmoku o atsumeta.",
+        "english": "Her outfit caught the attention of everyone around."
+    },
+    {
+        "japanese": "仕事の後で友達と会って、食事に行きます。",
+        "romaji": "Shigoto no ato de tomodachi to atte, shokuji ni ikimasu.",
+        "english": "After work, I'm meeting a friend for dinner."
+    },
+    {
+        "japanese": "明日三時に駅で会いましょう。",
+        "romaji": "Ashita san-ji ni eki de aimashō.",
+        "english": "Let's meet at the station at 3pm tomorrow."
+    },
+    {
+        "japanese": "どこかでお会いしませんでしたか。",
+        "romaji": "Dokoka de oai shimasendeshita ka.",
+        "english": "Have we met somewhere before?"
+    },
+    {
+        "japanese": "この靴はサイズが合いません。もう少し小さいのをください。",
+        "romaji": "Kono kutsu wa saizu ga aimasen. Mō sukoshi chiisai no o kudasai.",
+        "english": "These shoes don't fit. Could I try a smaller size?"
+    },
+    {
+        "japanese": "答えが合っているかどうか、確かめてください。",
+        "romaji": "Kotae ga atte iru ka dō ka, tashikamete kudasai.",
+        "english": "Please verify whether my answer is correct."
+    },
+{
+        "japanese": "遅れたことを彼に謝ったほうがいい。",
+        "romaji": "Okureta koto o kare ni ayamatta hō ga ii.",
+        "english": "You'd better apologize to him for being late."
+    },
+    {
+        "japanese": "正直に謝ったら、彼女は許してくれた。",
+        "romaji": "Shōjiki ni ayamattara, kanojo wa yurushite kureta.",
+        "english": "After I gave a sincere apology, she forgave me."
+    },
+    {
+        "japanese": "彼女はとても怒って、彼に謝らせた。",
+        "romaji": "Kanojo wa totemo okotte, kare ni ayamaraseta.",
+        "english": "She was so angry that she forced him to apologize."
+    },
+    {
+        "japanese": "判断を誤ったかもしれない。",
+        "romaji": "Handan o ayamatta kamo-shirenai.",
+        "english": "I might have made a mistake in my judgment."
+    },
+    {
+        "japanese": "誤って、大切な書類を捨ててしまった。",
+        "romaji": "Ayamatte, taisetsu na shorui o sutete shimatta.",
+        "english": "I threw away the important documents by mistake."
+    },
+    {
+        "japanese": "あなたの荷物を預かっています。",
+        "romaji": "Anata no nimotsu o azukatte imasu.",
+        "english": "I'm holding onto your luggage for you."
+    },
+    {
+        "japanese": "このかばんを預かってもらえますか。",
+        "romaji": "Kono kaban o azukatte moraemasu ka.",
+        "english": "Could you watch this bag for me?"
+    },
+    {
+        "japanese": "コートはどこで預かってくれますか。",
+        "romaji": "Kōto wa doko de azukatte kuremasu ka.",
+        "english": "Where can I check my coat?"
+    },
+    {
+        "japanese": "こちらでお預かりいたします。",
+        "romaji": "Kochira de oazukari itashimasu.",
+        "english": "We'll be happy to store that for you here."
+    },
+    {
+        "japanese": "友達が子供を預かってくれた。",
+        "romaji": "Tomodachi ga kodomo o azukatte kureta.",
+        "english": "My friend looked after my child for me."
+    },
+    {
+        "japanese": "荷物を受付に預けました。",
+        "romaji": "Nimotsu o uketsuke ni azukemashita.",
+        "english": "I checked my luggage at the reception desk."
+    },
+    {
+        "japanese": "荷物を預ける所は、どこですか。",
+        "romaji": "Nimotsu o azukeru tokoro wa doko desu ka.",
+        "english": "Where is the luggage storage area?"
+    },
+    {
+        "japanese": "あそこに預けられますよ。",
+        "romaji": "Asoko ni azukeraremasu yo.",
+        "english": "You can check your items over there."
+    },
+    {
+        "japanese": "彼らは子供を保育園に預けて働いている。",
+        "romaji": "Karera wa kodomo o hoikuen ni azukete hataraite iru.",
+        "english": "They work while their child is in daycare."
+    },
+    {
+        "japanese": "鈴木さんは銀行に百万円を預けている。",
+        "romaji": "Suzuki-san wa ginkō ni hyaku-man en o azukete iru.",
+        "english": "Mr. Suzuki has ¥1,000,000 on deposit at the bank."
     }
         ];
